@@ -1,0 +1,36 @@
+rm -f flang4.1.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
+flang -O3 -g -c INTERFACE_ARRAY.F90
+flang -O3 -g -c INITIALISE.F90
+flang -O3 -g -o flang4.1.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
+Lowering default frequency rate from 4000 to 2300.
+Please consider tweaking /proc/sys/kernel/perf_event_max_sample_rate.
+[ perf record: Woken up 5 times to write data ]
+[ perf record: Captured and wrote 1.232 MB perf.data.flang4.1.0 (32220 samples) ]
+
+real	0m14.458s
+user	0m12.985s
+sys	0m0.360s
+rm -f ifort2021.10.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
+ifort -O3 -g -c INTERFACE_ARRAY.F90
+ifort -O3 -g -c INITIALISE.F90
+ifort -O3 -g -o ifort2021.10.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
+Lowering default frequency rate from 4000 to 2300.
+Please consider tweaking /proc/sys/kernel/perf_event_max_sample_rate.
+[ perf record: Woken up 3 times to write data ]
+[ perf record: Captured and wrote 0.711 MB perf.data.ifort2021.10.0 (18596 samples) ]
+
+real	0m8.449s
+user	0m6.987s
+sys	0m0.812s
+rm -f gfortran11.3.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
+gfortran -O3 -g -c INTERFACE_ARRAY.F90
+gfortran -O3 -g -c INITIALISE.F90
+gfortran -O3 -g -o gfortran11.3.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
+Lowering default frequency rate from 4000 to 2300.
+Please consider tweaking /proc/sys/kernel/perf_event_max_sample_rate.
+[ perf record: Woken up 4 times to write data ]
+[ perf record: Captured and wrote 0.785 MB perf.data.gfortran11.3.0 (20545 samples) ]
+
+real	0m9.474s
+user	0m8.339s
+sys	0m0.406s
