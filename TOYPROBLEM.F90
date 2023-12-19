@@ -3,9 +3,9 @@ PROGRAM MainProgram
   REAL, DIMENSION(:,:,:), ALLOCATABLE :: ARRAY_AI
   REAL, DIMENSION(:,:), ALLOCATABLE :: ARRAY_TYPE
   REAL, DIMENSION(:,:,:), ALLOCATABLE :: RESULT_ARRAY
-  INTEGER :: i, j, k
+  INTEGER :: i, j, k, run
 
-  INTEGER, PARAMETER :: dim1 = 500, dim2 = 500, dim3 = 500
+  INTEGER, PARAMETER :: dim1 = 500, dim2 = 500, dim3 = 500, total_runs = 10
 
   ALLOCATE(ARRAY_AI(dim1, dim2, dim3))
   ALLOCATE(ARRAY_TYPE(dim2, dim3))
@@ -25,7 +25,9 @@ PROGRAM MainProgram
     END DO
   END DO
 
-  RESULT_ARRAY = init(ARRAY_AI, ARRAY_TYPE)
+  DO run = 1, total_runs
+    RESULT_ARRAY = init(ARRAY_AI, ARRAY_TYPE)
+  END DO
 
   DEALLOCATE(ARRAY_AI, ARRAY_TYPE, RESULT_ARRAY)
 

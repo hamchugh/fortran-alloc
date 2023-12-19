@@ -1,36 +1,30 @@
 rm -f flang4.1.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
-flang -O3 -g -c INTERFACE_ARRAY.F90
-flang -O3 -g -c INITIALISE.F90
-flang -O3 -g -o flang4.1.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
+flang -O3 -Mstack_arrays -g -c INTERFACE_ARRAY.F90
+flang -O3 -Mstack_arrays -g -c INITIALISE.F90
+flang -O3 -Mstack_arrays -g -o flang4.1.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
 Lowering default frequency rate from 4000 to 2300.
 Please consider tweaking /proc/sys/kernel/perf_event_max_sample_rate.
-[ perf record: Woken up 5 times to write data ]
-[ perf record: Captured and wrote 1.232 MB perf.data.flang4.1.0 (32220 samples) ]
-
-real	0m14.458s
-user	0m12.985s
-sys	0m0.360s
+[ perf record: Woken up 21 times to write data ]
+[ perf record: Captured and wrote 5.080 MB perf.data.flang4.1.0 (133069 samples) ]
+57.25user 0.95system 1:03.13elapsed 92%CPU (0avgtext+0avgdata 1471804maxresident)k
+0inputs+0outputs (0major+11643minor)pagefaults 0swaps
 rm -f ifort2021.10.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
 ifort -O3 -g -c INTERFACE_ARRAY.F90
 ifort -O3 -g -c INITIALISE.F90
 ifort -O3 -g -o ifort2021.10.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
 Lowering default frequency rate from 4000 to 2300.
 Please consider tweaking /proc/sys/kernel/perf_event_max_sample_rate.
-[ perf record: Woken up 3 times to write data ]
-[ perf record: Captured and wrote 0.711 MB perf.data.ifort2021.10.0 (18596 samples) ]
-
-real	0m8.449s
-user	0m6.987s
-sys	0m0.812s
+[ perf record: Woken up 12 times to write data ]
+[ perf record: Captured and wrote 2.981 MB perf.data.ifort2021.10.0 (78092 samples) ]
+32.62user 0.94system 0:36.43elapsed 92%CPU (0avgtext+0avgdata 1468212maxresident)k
+0inputs+0outputs (0major+3297minor)pagefaults 0swaps
 rm -f gfortran11.3.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
 gfortran -O3 -g -c INTERFACE_ARRAY.F90
 gfortran -O3 -g -c INITIALISE.F90
 gfortran -O3 -g -o gfortran11.3.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
 Lowering default frequency rate from 4000 to 2300.
 Please consider tweaking /proc/sys/kernel/perf_event_max_sample_rate.
-[ perf record: Woken up 4 times to write data ]
-[ perf record: Captured and wrote 0.785 MB perf.data.gfortran11.3.0 (20545 samples) ]
-
-real	0m9.474s
-user	0m8.339s
-sys	0m0.406s
+[ perf record: Woken up 16 times to write data ]
+[ perf record: Captured and wrote 3.885 MB perf.data.gfortran11.3.0 (101789 samples) ]
+50.13user 1.33system 0:55.80elapsed 92%CPU (0avgtext+0avgdata 979740maxresident)k
+0inputs+0outputs (0major+2284minor)pagefaults 0swaps
