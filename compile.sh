@@ -7,6 +7,9 @@
 rm -rf ./*.exe
 rm -rf ./perf.data*
 
+# Unlimited stack size
+ulimit -s unlimited
+
 # Make flang available
 spack load aocc@4.1.0 target=x86_64
 export FC=flang
@@ -24,8 +27,8 @@ export FC=ifort
 export FFLAGS="-O3 -g"
 export PROGRAM=ifort2021.10.0_toy.exe
 make clean && make
-#perf record -o perf.data.ifort2021.10.0 ./ifort2021.10.0_toy.exe
-#time ./ifort2021.10.0_toy.exe
+perf record -o perf.data.ifort2021.10.0 ./ifort2021.10.0_toy.exe
+time ./ifort2021.10.0_toy.exe
 
 # Remove previously used compilers
 spack unload --all
