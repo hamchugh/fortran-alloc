@@ -1,24 +1,87 @@
 rm -f flang4.1.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
 flang -O3 -Mstack_arrays -g -c INTERFACE_ARRAY.F90
 flang -O3 -Mstack_arrays -g -c INITIALISE.F90
-flang -O3 -Mstack_arrays -g -o flang4.1.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
-[ perf record: Woken up 21 times to write data ]
-[ perf record: Captured and wrote 5.200 MB perf.data.flang4.1.0 (135905 samples) ]
-34.49user 1.16system 0:35.72elapsed 99%CPU (0avgtext+0avgdata 1471432maxresident)k
-0inputs+0outputs (0major+1465418minor)pagefaults 0swaps
+flang -O3 -Mstack_arrays -g -o flang4.1.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o -lm -lamdalloc
+
+ Performance counter stats for './flang4.1.0_toy.exe':
+
+          50458.42 msec task-clock:u              #    1.000 CPUs utilized          
+                 0      context-switches:u        #    0.000 /sec                   
+                 0      cpu-migrations:u          #    0.000 /sec                   
+              4185      page-faults:u             #   82.940 /sec                   
+      162234799766      cycles:u                  #    3.215 GHz                      (83.33%)
+       23753809428      stalled-cycles-frontend:u #   14.64% frontend cycles idle     (83.34%)
+       66017658241      stalled-cycles-backend:u  #   40.69% backend cycles idle      (83.33%)
+      240688452181      instructions:u            #    1.48  insn per cycle         
+                                                  #    0.27  stalled cycles per insn  (83.34%)
+       35602292742      branches:u                #  705.577 M/sec                    (83.33%)
+          18215732      branch-misses:u           #    0.05% of all branches          (83.34%)
+
+      50.470746447 seconds time elapsed
+
+      49.851005000 seconds user
+       0.122425000 seconds sys
+
+
+[ perf record: Woken up 31 times to write data ]
+[ perf record: Captured and wrote 7.696 MB perf.data.flang4.1.0 (201621 samples) ]
+51.33user 0.11system 0:51.58elapsed 99%CPU (0avgtext+0avgdata 1485152maxresident)k
+0inputs+0outputs (0major+4320minor)pagefaults 0swaps
 rm -f ifort2021.10.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
 ifort -O3 -g -c INTERFACE_ARRAY.F90
 ifort -O3 -g -c INITIALISE.F90
-ifort -O3 -g -o ifort2021.10.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
-[ perf record: Woken up 10 times to write data ]
-[ perf record: Captured and wrote 2.345 MB perf.data.ifort2021.10.0 (61097 samples) ]
-14.38user 0.90system 0:15.32elapsed 99%CPU (0avgtext+0avgdata 1468204maxresident)k
-0inputs+0outputs (0major+366614minor)pagefaults 0swaps
+ifort -O3 -g -o ifort2021.10.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o -lm
+
+ Performance counter stats for './ifort2021.10.0_toy.exe':
+
+          35604.96 msec task-clock:u              #    1.000 CPUs utilized          
+                 0      context-switches:u        #    0.000 /sec                   
+                 0      cpu-migrations:u          #    0.000 /sec                   
+              6364      page-faults:u             #  178.739 /sec                   
+      112408115729      cycles:u                  #    3.157 GHz                      (83.33%)
+        1389204893      stalled-cycles-frontend:u #    1.24% frontend cycles idle     (83.34%)
+      100297011291      stalled-cycles-backend:u  #   89.23% backend cycles idle      (83.33%)
+       66775241148      instructions:u            #    0.59  insn per cycle         
+                                                  #    1.50  stalled cycles per insn  (83.34%)
+        3869822321      branches:u                #  108.688 M/sec                    (83.33%)
+           8478061      branch-misses:u           #    0.22% of all branches          (83.34%)
+
+      35.618673849 seconds time elapsed
+
+      34.489900000 seconds user
+       0.806472000 seconds sys
+
+
+[ perf record: Woken up 22 times to write data ]
+[ perf record: Captured and wrote 5.454 MB perf.data.ifort2021.10.0 (142868 samples) ]
+34.49user 0.81system 0:35.38elapsed 99%CPU (0avgtext+0avgdata 1468404maxresident)k
+0inputs+0outputs (0major+5873minor)pagefaults 0swaps
 rm -f gfortran13.1.0_toy.exe INTERFACE_ARRAY.o INITIALISE.o *.mod
 gfortran -O3 -g -c INTERFACE_ARRAY.F90
 gfortran -O3 -g -c INITIALISE.F90
-gfortran -O3 -g -o gfortran13.1.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o
-[ perf record: Woken up 11 times to write data ]
-[ perf record: Captured and wrote 2.617 MB perf.data.gfortran13.1.0 (68223 samples) ]
-15.77user 0.92system 0:16.73elapsed 99%CPU (0avgtext+0avgdata 979552maxresident)k
-0inputs+0outputs (0major+244486minor)pagefaults 0swaps
+gfortran -O3 -g -o gfortran13.1.0_toy.exe TOYPROBLEM.F90 INTERFACE_ARRAY.o INITIALISE.o -lm
+
+ Performance counter stats for './gfortran13.1.0_toy.exe':
+
+          53598.69 msec task-clock:u              #    0.999 CPUs utilized          
+                 0      context-switches:u        #    0.000 /sec                   
+                 0      cpu-migrations:u          #    0.000 /sec                   
+              5430      page-faults:u             #  101.308 /sec                   
+      160938736538      cycles:u                  #    3.003 GHz                      (83.34%)
+         102560820      stalled-cycles-frontend:u #    0.06% frontend cycles idle     (83.33%)
+      143317413465      stalled-cycles-backend:u  #   89.05% backend cycles idle      (83.34%)
+       98324827179      instructions:u            #    0.61  insn per cycle         
+                                                  #    1.46  stalled cycles per insn  (83.33%)
+       11063888871      branches:u                #  206.421 M/sec                    (83.34%)
+           8164429      branch-misses:u           #    0.07% of all branches          (83.33%)
+
+      53.670672095 seconds time elapsed
+
+      49.654921000 seconds user
+       3.476513000 seconds sys
+
+
+[ perf record: Woken up 33 times to write data ]
+[ perf record: Captured and wrote 8.206 MB perf.data.gfortran13.1.0 (215019 samples) ]
+49.24user 3.81system 0:53.17elapsed 99%CPU (0avgtext+0avgdata 979628maxresident)k
+0inputs+0outputs (0major+5452minor)pagefaults 0swaps

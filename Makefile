@@ -1,6 +1,7 @@
 # Compiler settings - Can be customized.
 FC ?= gfortran
 FFLAGS ?= -O2 -g
+LDFLAGS ?= -lm
 
 # Program name
 PROGRAM ?= gfortran_toy.exe
@@ -12,7 +13,7 @@ OBJS = INTERFACE_ARRAY.o INITIALISE.o
 all: $(PROGRAM)
 
 $(PROGRAM): $(OBJS)
-	$(FC) $(FFLAGS) -o $@ TOYPROBLEM.F90 $^
+	$(FC) $(FFLAGS) -o $@ TOYPROBLEM.F90 $^ $(LDFLAGS)
 
 %.o: %.F90
 	$(FC) $(FFLAGS) -c $<
