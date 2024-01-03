@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Use Spack for compiler access
-. /work/hamchugh/spack/share/spack/setup-env.sh
+. /home/hamchugh/spack/share/spack/setup-env.sh
 
-for arch in znver2 znver3 znver4
+for arch in znver4
 do
 
 mkdir -p $arch
@@ -19,7 +19,7 @@ rm -rf ./perf.data*
 ulimit -s unlimited
 
 # Make flang available
-spack load aocc@4.1.0 target=x86_64
+spack load --first aocc@4.1.0
 export FC=flang
 export FFLAGS="-O3 -Mstack_arrays -g -march=$arch -mtune=$arch"
 export LDFLAGS="-lm -lamdalloc"
@@ -34,7 +34,7 @@ numactl --physcpubind=0 time ./flang4.1.0_toy.exe
 # Remove previously used compilers
 spack unload --all
 # Make intel compiler available
-spack load intel-oneapi-compilers target=x86_64
+spack load --first intel-oneapi-compilers
 export FC=ifort
 
 # Equivalent for Itel flags
@@ -58,16 +58,16 @@ numactl --physcpubind=0 time ./ifort2021.10.0_toy.exe
 
 # Remove previously used compilers
 spack unload --all
-spack load gcc@13.1.0 target=x86_64
+spack load --first gcc@13:
 export FC=gfortran
 export FFLAGS="-O3 -g -march=$arch -mtune=$arch"
 export LDFLAGS="-lm"
-export PROGRAM=gfortran13.1.0_toy.exe
+export PROGRAM=gfortran13_toy.exe
 make clean && make
-numactl --physcpubind=0 perf stat ./gfortran13.1.0_toy.exe
-numactl --physcpubind=0 perf record -o perf.data.gfortran13.1.0 ./gfortran13.1.0_toy.exe
+numactl --physcpubind=0 perf stat ./gfortran13_toy.exe
+numactl --physcpubind=0 perf record -o perf.data.gfortran13 ./gfortran13_toy.exe
 echo "TIMING FOR GNU"
-numactl --physcpubind=0 time ./gfortran13.1.0_toy.exe
+numactl --physcpubind=0 time ./gfortran13_toy.exe
 
 cd ..
 
