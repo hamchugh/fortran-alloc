@@ -2,3 +2,4 @@
 *.mod
 perf*
 *.o
+znver*/
